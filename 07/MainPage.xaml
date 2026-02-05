@@ -7,14 +7,19 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
+            
+            <Label x:Name="lblValorSlider" Text="Control Slider. Valor: 50" />
+            <Slider Minimum="0" Maximum="100" Value="50" ValueChanged="CambiaValorSlider" />
 
-            <Label Text="Fecha de nacimiento:" />
-            <DatePicker x:Name="FechaNace" Date="{x:Static System:DateTime.Today}"></DatePicker>
+            <Label x:Name="lblValorStepper" Text="Control Stepper. Valor: " />
+            <Stepper Minimum="0" Maximum="10" Increment="1" ValueChanged="CambiaValorStepper" />
 
-            <Button Text="Calcular edad" Clicked="CalcularEdad" />
+            <Label Text="Barra de progreso" />
+            <Stepper Minimum="0" Maximum="1" Increment="0.1" ValueChanged="CambiaValorProgreso" />
+            <ProgressBar x:Name="pgbProgreso" />
 
-            <Label Text="Resultado:" />
-            <Entry x:Name="Salida" IsReadOnly="True" Placeholder="Aquí verás la edad" />
+            <Label Text="Separador con BoxView" />
+            <BoxView HeightRequest="10" BackgroundColor="#DDD" />
 
         </VerticalStackLayout>
     </ScrollView>

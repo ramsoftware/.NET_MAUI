@@ -6,15 +6,17 @@
         }
 
 
-        private void CalcularEdad(object sender, EventArgs e) {
-            var nacimiento = FechaNace.Date.Value; // solo la parte de fecha
-            var hoy = DateTime.Today;              // fecha actual (zona horaria del dispositivo)
+        private void CambiaValorSlider(object sender, ValueChangedEventArgs e) {
+            // e.NewValue trae el valor actual (double)
+            lblValorSlider.Text = $"Control Slider. Valor: {e.NewValue:0.##}";
+        }
 
-            // Cálculo de la edad en años
-            int edad = hoy.Year - nacimiento.Year;
+        private void CambiaValorStepper(object sender, ValueChangedEventArgs e) {
+             lblValorStepper.Text = $"Control Stepper. Valor: {e.NewValue:0.##}";
+        }
 
-            // Muestra al usuario
-            Salida.Text = "Tienes " + edad.ToString() + " años";
+        private void CambiaValorProgreso(object sender, ValueChangedEventArgs e) {
+            pgbProgreso.Progress = e.NewValue;
         }
     }
 }
