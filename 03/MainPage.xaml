@@ -1,0 +1,45 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DemoApp.Views.ControlesBasicosPage"
+             Title="Controles comunes">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <!-- Texto -->
+            <Label Text="Hola, .NET MAUI" FontSize="24" FontAttributes="Bold" />
+            <Label Text="Ingresa tu nombre:" />
+
+            <!-- Entrada de texto -->
+            <Entry x:Name="UnNombre" Placeholder="Tu nombre" />
+            <Editor Placeholder="Comentarios (multilínea)" AutoSize="TextChanges"/>
+
+            <!-- Botones -->
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Guardar" Clicked="CuandoHaceClic" />
+                <ImageButton Source="save.png" BackgroundColor="Transparent"
+                             Clicked="OtroEventoClic" WidthRequest="40" HeightRequest="40"/>
+            </HorizontalStackLayout>
+
+            <!-- Selección -->
+            <Picker Title="Selecciona una opción">
+                <Picker.Items>
+                    <x:String>Opción A</x:String>
+                    <x:String>Opción B</x:String>
+                    <x:String>Opción C</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <HorizontalStackLayout Spacing="16">
+                <CheckBox x:Name="AceptoCheck" />
+                <Label Text="Acepto t茅rminos" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="16">
+                <Label Text="Modo oscuro" VerticalTextAlignment="Center"/>
+                <Switch x:Name="FondoOscuro" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
