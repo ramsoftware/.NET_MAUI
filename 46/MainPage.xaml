@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchivoLocal.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <!-- Etiqueta -->
+            <Label Text="Cadena a guardar:" />
+
+            <!-- Entrada de texto -->
+            <Entry x:Name="CadenaGuarda" />
+
+            <!-- Etiqueta -->
+            <Label Text="Nombre del archivo:" />
+
+            <!-- Entrada de texto -->
+            <Entry x:Name="NombreArchivo" />
+
+            <!-- Botón -->
+            <Button Text="Presionar" Clicked="CuandoHaceClic" />
+
+            <!-- Etiqueta -->
+            <Label Text="Lee el archivo:" />
+
+            <!-- Salida -->
+            <Entry x:Name="LaSalida" IsReadOnly="True"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
