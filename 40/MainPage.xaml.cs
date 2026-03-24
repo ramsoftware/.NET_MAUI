@@ -1,77 +1,78 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-
-namespace Animacion {
+﻿namespace Animacion {
     public partial class MainPage : ContentPage {
-
-        const int Filas = 10;
-        const int Columnas = 10;
-
-        // Matriz para llevar el estado encendido/apagado (o seleccionada/no)
-        private readonly bool[,] Tablero = new bool[Filas, Columnas];
-
-        // Colores base
-        private readonly Color Apagado = Colors.LightGray;
-        private readonly Color Encendido = Colors.SteelBlue;
+        //Usa el objeto timer para actualizar la posición del rectángulo y redibujar la pantalla
+        IDispatcherTimer timer;
+        int MueveX = 1;
+        int MueveY = 0;
+        int Tiempo = 18;
 
         public MainPage() {
             InitializeComponent();
-            GeneraTablero();
+
+            timer = Application.Current?.Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(Tiempo);
+            if (timer is null) return;
+            timer.Tick += OnTick;
+            timer.Start();
         }
 
-        private void GeneraTablero() {
-            //Definir filas y columnas
-            MatrizGrafica.RowDefinitions.Clear();
-            MatrizGrafica.ColumnDefinitions.Clear();
 
-            for (int fila = 0; fila < Filas; fila++)
-                MatrizGrafica.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-
-            for (int columna = 0; columna < Columnas; columna++)
-                MatrizGrafica.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-
-            // Crear celdas y cada uno con su bloque
-            for (int fila = 0; fila < Filas; fila++) {
-                for (int columna = 0; columna < Columnas; columna++) {
-
-                    var bloque = new Border {
-                        Padding = 0,
-                        Margin = new Thickness(2),
-                        Background = Apagado,                 // antes: BackgroundColor
-                        Stroke = Colors.Gray,                 // antes: BorderColor
-                        StrokeThickness = 1,                  // opcional
-                        StrokeShape = new RoundRectangle {    // antes: CornerRadius
-                            CornerRadius = new CornerRadius(6)
-                        }
-                        // Nota: Border no tiene HasShadow
-                    };
-
-                    // Guarda coordenadas como tupla en BindingContext
-                    bloque.BindingContext = (row: fila, col: columna);
-
-                    //Evento de cada bloque
-                    var presionaDedo = new TapGestureRecognizer();
-                    presionaDedo.Tapped += CeldaPresionada;
-                    bloque.GestureRecognizers.Add(presionaDedo);
-
-                    //El bloque es adicionado a la matriz gráfica
-                    Grid.SetRow(bloque, fila);
-                    Grid.SetColumn(bloque, columna);
-                    MatrizGrafica.Children.Add(bloque);
-                }
+        //Cada vez que hace tick el timer, se actualizan las
+        //posiciones del rectángulo y se redibuja la pantalla
+        void OnTick(object? sender, EventArgs e) {
+            //Se mueve siempre que el rectángulo no se salga de los límites del canvas
+            if ((MueveX == 1 && Rectangulo.PosXb <= CanvasView.Width) ||
+                (MueveX == -1 && Rectangulo.PosXa >= 0)) {
+                Rectangulo.PosXa += MueveX;
+                Rectangulo.PosXb += MueveX;
+                Rectangulo.PosXc += MueveX;
+                Rectangulo.PosXd += MueveX;
             }
 
+            //Se mueve siempre que el rectángulo no se salga de los límites del canvas
+            if ((MueveY == 1 && Rectangulo.PosYb <= CanvasView.Height) ||
+                (MueveY == -1 && Rectangulo.PosYa >= 0)) {
+                Rectangulo.PosYa += MueveY;
+                Rectangulo.PosYb += MueveY;
+                Rectangulo.PosYc += MueveY;
+                Rectangulo.PosYd += MueveY;
+            }
+
+            CanvasView.Invalidate();
         }
 
-        private void CeldaPresionada(object? sender, TappedEventArgs e) {
-            if (sender is not Border cell) return;
-            if (cell.BindingContext is not (int fila, int columna)) return;
-
-            // Alternar estado
-            Tablero[fila, columna] = !Tablero[fila, columna];
-
-            // Aplicar color (nota: Border usa Background de tipo Paint)
-            cell.Background = Tablero[fila, columna] ? Encendido : Apagado;
+        void PresionaIzquierda(object sender, EventArgs e) {
+            MueveX = -1;
+            MueveY = 0;
         }
 
+        void PresionaDerecha(object sender, EventArgs e) {
+            MueveX = 1;
+            MueveY = 0;
+        }
+
+        void PresionaArriba(object sender, EventArgs e) {
+            MueveY = -1;
+            MueveX = 0;
+        }
+
+        void PresionaAbajo(object sender, EventArgs e) {
+            MueveY = 1;
+            MueveX = 0;
+        }
+
+        void MasVelocidad(object sender, EventArgs e) {
+            if (Tiempo > 3) {
+                Tiempo -= 3;
+                timer.Interval = TimeSpan.FromMilliseconds(Tiempo);
+            }
+        }
+
+        void MenosVelocidad(object sender, EventArgs e) {
+            if (Tiempo < 60) {
+                Tiempo += 3;
+                timer.Interval = TimeSpan.FromMilliseconds(Tiempo);
+            }
+        }
     }
 }
