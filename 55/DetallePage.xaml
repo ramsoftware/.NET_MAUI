@@ -1,0 +1,36 @@
+<ContentPage
+    x:Class="BaseDatos.DetallePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="ID:" />
+        <Label x:Name="LblId" FontAttributes="Bold"/>
+
+        <Label Text="Nombre:" />
+        <Label x:Name="LblNombre" FontAttributes="Bold"/>
+
+        <Label Text="Plataforma:" />
+        <Label x:Name="LblPlataforma" FontAttributes="Bold"/>
+
+        <Label Text="Género:" />
+        <Label x:Name="LblGenero" FontAttributes="Bold"/>
+
+        <Label Text="Año:" />
+        <Label x:Name="LblAnyo" FontAttributes="Bold"/>
+
+        <Button Text="Borrar"
+        BackgroundColor="Red"
+        TextColor="White"
+        Clicked="Borrar_Clicked" />
+
+        <Button Text="Editar"
+        BackgroundColor="DodgerBlue"
+        TextColor="White"
+        Clicked="Editar_Clicked" />
+
+
+    </VerticalStackLayout>
+
+</ContentPage>
