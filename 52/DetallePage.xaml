@@ -1,0 +1,18 @@
+<ContentPage
+    x:Class="BaseDatos.DetallePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Padding="20" Spacing="25">
+
+        <Label Text="Detalle del Color" FontSize="26" HorizontalOptions="Center"/>
+
+        <Label Text="Id:" FontSize="20"/>
+        <Label x:Name="LblId" FontSize="20" FontAttributes="Bold"/>
+
+        <Label Text="Nombre:" FontSize="20"/>
+        <Label x:Name="LblNombre" FontSize="20" FontAttributes="Bold"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,39 @@
+﻿<ContentPage
+    x:Class="BaseDatos.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Padding="20">
+
+        <!-- BOTONES DE NAVEGACIÓN -->
+        <Grid ColumnDefinitions="*,*,*,*" Margin="0,20,0,0">
+            <Button Text="Inicio" Margin="5" Clicked="IrInicio_Clicked"/>
+            <Button Text="Atrás" Margin="5" Grid.Column="1" Clicked="Atras_Clicked"/>
+            <Button Text="Adelante" Margin="5" Grid.Column="2" Clicked="Adelante_Clicked"/>
+            <Button Text="Final" Margin="5" Grid.Column="3" Clicked="IrFinal_Clicked"/>
+        </Grid>        
+        
+        <!-- GRID DE 2 COLUMNAS -->
+        <CollectionView x:Name="GridDatos" HeightRequest="400" >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="80,*,100" Padding="5">
+                        <Label Text="{Binding Id}" FontSize="16"/>
+                        <Label Grid.Column="1" Text="{Binding Nombre}" FontSize="16"/>
+
+                        <!-- Botón de detalle -->
+                        <Button 
+                    Grid.Column="2"
+                    Text="Detalle"
+                    Clicked="Detalle_Clicked"
+                    CommandParameter="{Binding}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
